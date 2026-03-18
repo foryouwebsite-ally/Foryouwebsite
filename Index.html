@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Ammudha ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:radial-gradient(circle at top,#10131a,#000);
+  color:white;
+  overflow:hidden;
+}
+
+/* Cinematic Fade */
+.fade-in{
+  animation:fadeIn 2s ease forwards;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(1.05)}
+  to{opacity:1;transform:scale(1)}
+}
+
+/* Star Background */
+canvas{
+  position:fixed;
+  top:0;left:0;
+  z-index:-1;
+}
+
+/* Layout */
+.container{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:40px;
+  margin-bottom:20px;
+}
+
+p{
+  max-width:500px;
+  font-size:18px;
+  line-height:1.7;
+  opacity:.9;
+}
+
+.buttons{
+  margin-top:35px;
+}
+
+button{
+  padding:12px 28px;
+  margin:10px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.yes{
+  background:#ff4da6;
+  color:white;
+}
+.yes:hover{transform:scale(1.1);box-shadow:0 0 25px #ff4da6}
+
+.no{
+  background:#2b2b2b;
+  color:white;
+  position:relative;
+}
+
+/* Final Screen */
+#final{
+  position:fixed;
+  inset:0;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  opacity:0;
+  pointer-events:none;
+  transition:1.5s ease;
+  text-align:center;
+  padding:20px;
+}
+
+#final h2{
+  font-family:'Playfair Display',serif;
+  font-size:42px;
+  color:#ff4da6;
+}
+
+/* Ring */
+.ring{
+  font-size:60px;
+  animation:ringPulse 2s ease-in-out infinite;
+  margin-bottom:20px;
+}
+@keyframes ringPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="container fade-in">
+  <h1>Ammudha, Will You Be Mine Forever? 💍</h1>
+  <p>
+    From the moment you came into my life,
+    everything became more beautiful.
+    Your smile is my peace,
+    your presence is my happiness,
+    and my heart chooses you —
+    today, tomorrow, forever.
+  </p>
+
+  <div class="buttons">
+    <button class="yes" onclick="acceptLove()">Yes ❤️</button>
+    <button class="no" id="noBtn">No 🙈</button>
+  </div>
+</div>
+
+<div id="final">
+  <div class="ring">💍</div>
+  <h2>Ammudha Said YES! ❤️✨</h2>
+  <p>Our forever begins now.</p>
+</div>
+
+<script>
+/* Stars */
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+let stars=[];
+for(let i=0;i<200;i++){
+  stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5});
+}
+function drawStars(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="white";
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+/* Yes Button */
+function acceptLove(){
+  heartBurst();
+  setTimeout(()=>{
+    const f=document.getElementById("final");
+    f.style.opacity="1";
+    f.style.pointerEvents="all";
+  },1200);
+}
+
+/* Heart Burst */
+function heartBurst(){
+  for(let i=0;i<35;i++){
+    let h=document.createElement("div");
+    h.innerHTML="💖";
+    h.style.position="fixed";
+    h.style.left="50%";
+    h.style.top="50%";
+    h.style.fontSize="20px";
+    h.style.transition="1.2s ease";
+    document.body.appendChild(h);
+    setTimeout(()=>{
+      h.style.left=Math.random()*100+"%";
+      h.style.top=Math.random()*100+"%";
+      h.style.opacity="0";
+    },50);
+    setTimeout(()=>h.remove(),1200);
+  }
+}
+
+/* No Button Runs Away */
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",moveBtn);
+noBtn.addEventListener("touchstart",moveBtn);
+function moveBtn(){
+  noBtn.style.position="absolute";
+  noBtn.style.left=Math.random()*80+"%";
+  noBtn.style.top=Math.random()*80+"%";
+}
+</script>
+
+</body>
+</html>
